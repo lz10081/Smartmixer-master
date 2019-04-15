@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '28.0.2'
     defaultConfig {
-        applicationId "com.example.vappu.recipebook"
+        applicationId "u.luxing.smartmixer.app"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
