@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen1"
+    tools:context="u.luxing.smartmixer.app.AddActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/myToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:padding=".1dp"
+                android:text="Lets set It up"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="25dp" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="483dp"
+                android:layout_height="686dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/iteam2" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/tank1name"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="1"
+                    android:hint="item Name:Rum"
+                    android:inputType="text" />
+                <EditText
+                    android:id="@+id/tank1amount"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:layout_weight="1"
+                    android:hint="Amount in ML"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/tank2name"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:layout_weight="1"
+                    android:hint="Vodka"
+                    android:inputType="text" />
+                <EditText
+                    android:id="@+id/tank2amount"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:layout_weight="1"
+                    android:hint="500"
+                    android:inputType="number" />
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="Submit"
+                android:text="Save" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.widget.RelativeLayout>

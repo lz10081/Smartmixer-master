@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Smart mixer</string>
+    <string name="action_settings">Settings</string>
+    <string name="send_to">Use: </string>
+    <string name="welcome_text">Welcome to your Smart Mixer! Turn On the mixer now, You can navigate by using the buttons on the toolbar to add you drinks.</string>
+    <string name="action_add">Add</string>
+    <string name="action_list">List</string>
+    <string name="action_close">Back</string>
+    <string name="recipe_title_hint">Recipe Title</string>
+    <string name="recipe_hint">Type your recipe here</string>
+    <string name="slide_1_title">Yum!</string>
+    <string name="Button">Continue</string>
+    <string name="BLUETOOTH">BLUETOOTH</string>
+</resources>

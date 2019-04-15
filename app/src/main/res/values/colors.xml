@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#dbe3e7</color>
+    <color name="colorPrimaryDark">#dbe3e7</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="bg_screen1">#FFFAE6</color>
+    <color name="add_screen1">#FAE0FB</color>
+    <color name="bg1">#90F3D7</color>
+    <color name="dot_dark_screen1">#FAE0FB</color>
+    <color name="dot_light_screen1">#f98da5</color>
+</resources>
