@@ -9,10 +9,12 @@ import java.util.UUID;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -77,45 +79,69 @@ public class Setup extends AppCompatActivity {
         btAdapter = BluetoothAdapter.getDefaultAdapter();
 
         checkBTState();
-        /**
-         *
-         */
         btnOn.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                SharedPreferences myPrefs;
-                myPrefs = getSharedPreferences("prefID", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = myPrefs.edit();
-                editor.putString("tanklname", tankln.getText().toString());
-                editor.putString("tankrname", tankrn.getText().toString());
-                editor.putInt("tanklam", Integer.parseInt(tankla.getText().toString()));
-                editor.putInt("tankram", Integer.parseInt(tankra.getText().toString()));
-                editor.apply();
 
-                String valueL= tankla.getText().toString();
-                int finalValueL=Integer.parseInt(valueL);
-                String valueR= tankra.getText().toString();
-                int finalValueR=Integer.parseInt(valueR);
-
-                Item itemL = new Item( tankln.getText().toString(), finalValueL);
-                Item itemR = new Item( tankrn.getText().toString(), finalValueR);
-                final u.luxing.smartmixer.app.TankData.FakeTank ltank = new TankData.FakeTank(0,itemL);
-                final u.luxing.smartmixer.app.TankData.FakeTank rtank = new TankData.FakeTank(1,itemR);
-                List tanklist = new ArrayList();
-                tanklist.add(ltank);
-                tanklist.add(rtank);
-                final TankData tankdata = new TankData(tanklist);
-
-                String js = "";
-                GsonWriter gs = new GsonWriter();
-                try {
-                    js =  gs.write(tankdata);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if(tankln.getText().toString().equals("") || tankln.getText().toString().equals("") ){
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(Setup.this);
+                    dlgAlert.setMessage("You have to enter all set up");
+                    dlgAlert.setTitle("Error");
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //dismiss the dialog
+                                }
+                            });
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                }else if (tankla.getText().toString().equals("") || tankra.getText().toString().equals("")){
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(Setup.this);
+                    dlgAlert.setMessage("You have to enter all set up");
+                    dlgAlert.setTitle("Error");
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //dismiss the dialog
+                                }
+                            });
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
                 }
-                sendData(js);
-                sendData("\u0004\u0004");
-                finish();
-                startActivity(new Intent(Setup.this, MainActivity.class));
+                else{
+                    SharedPreferences myPrefs;
+                    myPrefs = getSharedPreferences("prefID", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = myPrefs.edit();
+                    editor.putString("tanklname", tankln.getText().toString());
+                    editor.putString("tankrname", tankrn.getText().toString());
+                    editor.putInt("tanklam", Integer.parseInt(tankla.getText().toString()));
+                    editor.putInt("tankram", Integer.parseInt(tankra.getText().toString()));
+                    editor.apply();
+                    String valueL= tankla.getText().toString();
+                    int finalValueL=Integer.parseInt(valueL);
+                    String valueR= tankra.getText().toString();
+                    int finalValueR=Integer.parseInt(valueR);
+
+                    Item itemL = new Item( tankln.getText().toString(), finalValueL);
+                    Item itemR = new Item( tankrn.getText().toString(), finalValueR);
+                    final u.luxing.smartmixer.app.TankData.FakeTank ltank = new TankData.FakeTank(0,itemL);
+                    final u.luxing.smartmixer.app.TankData.FakeTank rtank = new TankData.FakeTank(1,itemR);
+                    List tanklist = new ArrayList();
+                    tanklist.add(ltank);
+                    tanklist.add(rtank);
+                    final TankData tankdata = new TankData(tanklist);
+
+                    String js = "";
+                    GsonWriter gs = new GsonWriter();
+                    try {
+                        js =  gs.write(tankdata);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    sendData(js);
+                    sendData("\u0004\u0004");
+                    finish();
+                    startActivity(new Intent(Setup.this, MainActivity.class));
+                }
             }
         });
 
