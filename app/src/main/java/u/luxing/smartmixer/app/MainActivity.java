@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         queryContentProvider();
         queryProvider();
-        /*
+
         h = new Handler() {
             public void handleMessage(android.os.Message msg) {
                 switch (msg.what) {
@@ -97,12 +97,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
         };
-*/
+
         btAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        //checkBTState();
+        checkBTState();
     }
-/*
+
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
         if(Build.VERSION.SDK_INT >= 10){
             try {
@@ -216,7 +216,8 @@ public class MainActivity extends AppCompatActivity {
             try {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
-            } catch (IOException e) { }
+            } catch (IOException e) {
+            }
 
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
@@ -237,7 +238,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-    public void write(String message) {
+
+        public void write(String message) {
             Log.d(TAG, "...Data to send: " + message + "...");
             byte[] msgBuffer = message.getBytes();
             try {
@@ -246,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "...Error data send: " + e.getMessage() + "...");
             }
         }
-    */
+    }
 /* Call this from the main activity to send data to the remote device */
 
 

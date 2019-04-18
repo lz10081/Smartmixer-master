@@ -7,8 +7,10 @@ package u.luxing.smartmixer.app;
  * @version 4/1/2019.
  */
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -61,28 +63,57 @@ public class AddActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = myPrefs.edit();
         final String tanklname = myPrefs.getString("tanklname","def");
         final String tankrname = myPrefs.getString("tankrname","def");
+        final Integer tankLamount = myPrefs.getInt("tanklam",0);
+        final Integer tankRamount = myPrefs.getInt("tankram",0);
         // get String from editText boxes
         EditText editTextT = (EditText) findViewById(R.id.editTextTitle);
         EditText tank1 = (EditText) findViewById(R.id.tank1);
         EditText tank2 = (EditText) findViewById(R.id.tank2);
         // TODO if everything works refactor these lines out
-        String title = editTextT.getText().toString();
-        String recipe = title+"|"+tank1.getText().toString() +"|"+ tank2.getText().toString() +"|"+ tanklname + "|"+tankrname;
 
-        editor.putString("title",title);
-        editor.putInt("tanklnumber", Integer.parseInt(tank1.getText().toString()));
-        editor.putInt("tankrnumber", Integer.parseInt(tank2.getText().toString()));
-        editor.apply();
-        // post the recipe into the database
-        // same as dbAdapter.insertRecipe(title, recipe);
-       // dbAdapter.insertRecipe(editTextT.getText().toString(), editTextR.getText().toString());
 
-        ContentValues newValues = new ContentValues();
-        newValues.put(RecipeContract.TITLE, title);
-        newValues.put(RecipeContract.RECIPE, recipe);
-        getContentResolver().insert(RecipeContract.RECIPE_URI, newValues);
+        if(tankLamount < Integer.parseInt(tank1.getText().toString()) || tankRamount < Integer.parseInt(tank2.getText().toString()) ){
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Amount must be less than the what you have in the set up");
+            dlgAlert.setTitle("Error");
+            dlgAlert.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //dismiss the dialog
+                        }
+                    });
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+        }else if(editTextT.getText().toString().equals("")){
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Make sure you have a name for this recipe");
+            dlgAlert.setTitle("Error");
+            dlgAlert.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //dismiss the dialog
+                        }
+                    });
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+        }else
+        {
+            editor.putInt("tanklnumber", Integer.parseInt(tank1.getText().toString()));
+            editor.putInt("tankrnumber", Integer.parseInt(tank2.getText().toString()));
+            editor.apply();
+            // post the recipe into the database
+            // same as dbAdapter.insertRecipe(title, recipe);
+            // dbAdapter.insertRecipe(editTextT.getText().toString(), editTextR.getText().toString());
+            String title = editTextT.getText().toString();
+            String recipe = title+"|"+tank1.getText().toString() +"|"+ tank2.getText().toString() +"|"+ tanklname + "|"+tankrname;
+            editor.putString("title",title);
+            ContentValues newValues = new ContentValues();
+            newValues.put(RecipeContract.TITLE, title);
+            newValues.put(RecipeContract.RECIPE, recipe);
+            getContentResolver().insert(RecipeContract.RECIPE_URI, newValues);
+            finish(); // done, close activity
+        }
 
-        finish(); // done, close activity
     }
 
     /**
