@@ -5,7 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="bg_screen1">#FFFAE6</color>
     <color name="add_screen1">#FAE0FB</color>
+    <color name="home1">#C0D8C8</color>
     <color name="bg1">#90F3D7</color>
+    <color name="setup">#885D4D</color>
     <color name="dot_dark_screen1">#FAE0FB</color>
     <color name="dot_light_screen1">#f98da5</color>
+    <color name="res">#4E5E5C</color>
+
 </resources>

@@ -18,14 +18,19 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import pl.droidsonroids.gif.GifTextView;
+
 public class MenuActivity extends AppCompatActivity {
     private Button buttonBluetooth;
     private static final int MY_PERMISSIONS_REQUEST_READ_WRITE_STORAGE = 1;
+    GifTextView gifImageView;
 
     /**
      *
@@ -35,6 +40,8 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        gifImageView = (GifTextView)findViewById(R.id.loading1);
+        playGif();
         requestPermissions();
         new Timer().schedule(new TimerTask() {
 
@@ -51,7 +58,27 @@ public class MenuActivity extends AppCompatActivity {
 
         }, 5000);
     }
+    public void playGif(){
+        Animation fadeout = new AlphaAnimation(1.f, 1.f);
+        fadeout.setDuration(2500); // You can modify the duration here
+        fadeout.setAnimationListener(new Animation.AnimationListener() {
 
+            @Override
+            public void onAnimationStart(Animation animation) {
+                gifImageView.setBackgroundResource(R.drawable.lo1);// image from https://dribbble.com/osvaldadi
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+        });
+        gifImageView.startAnimation(fadeout);
+    }
     /**
      *
      */

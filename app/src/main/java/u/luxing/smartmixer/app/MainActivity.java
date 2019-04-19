@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private BluetoothSocket btSocket = null;
     private OutputStream outStream = null;
     Handler h;
+    private ConnectedThread mConnectedThread;
 
     final int RECIEVE_MESSAGE = 1;        // Status  for Handler
     private StringBuilder sb = new StringBuilder();
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         return  device.createRfcommSocketToServiceRecord(MY_UUID);
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -131,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             btSocket = createBluetoothSocket(device);
-        } catch (IOException e1) {
-            errorExit("Fatal Error", "In onResume() and socket create failed: " + e1.getMessage() + ".");
+        } catch (IOException e) {
+            errorExit("Fatal Error", "In onResume() and socket create failed: " + e.getMessage() + ".");
         }
 
         // Discovery is resource intensive.  Make sure it isn't going on
@@ -143,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "...Connecting...");
         try {
             btSocket.connect();
-            Log.d(TAG, "...Connection ok...");
+            Log.d(TAG, "....Connection ok...");
         } catch (IOException e) {
             try {
                 btSocket.close();
@@ -155,12 +157,10 @@ public class MainActivity extends AppCompatActivity {
         // Create a data stream so we can talk to server.
         Log.d(TAG, "...Create Socket...");
 
-        try {
-            outStream = btSocket.getOutputStream();
-        } catch (IOException e) {
-            errorExit("Fatal Error", "In onResume() and output stream creation failed:" + e.getMessage() + ".");
-        }
+        mConnectedThread = new ConnectedThread(btSocket);
+        mConnectedThread.start();
     }
+
 
     @Override
     public void onPause() {

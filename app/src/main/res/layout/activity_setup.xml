@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen1"
+    android:background="@color/setup"
     tools:context="u.luxing.smartmixer.app.AddActivity">
 
     <LinearLayout
@@ -17,11 +17,7 @@
         android:gravity="center_vertical"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/myToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,16 +28,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="36dp"
                 android:padding=".1dp"
-                android:text="Lets set It up"
+                android:layout_marginTop="50dp"
+                android:text="Let's set It up"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="25dp" />
 
             <pl.droidsonroids.gif.GifImageView
-                android:layout_width="483dp"
+                android:layout_width="683dp"
                 android:layout_height="686dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/iteam2" />
+                android:src="@drawable/r3" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
