@@ -33,10 +33,12 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.nio.ByteBuffer;
 import java.util.UUID;
 
 /**
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // MAC-address of Bluetooth module (you must edit this line)
-    private static String address = "B8:27:EB:F1:A2:E6";
+    private static String address = "B8:27:EB:A8:96:AB";
 
     SimpleCursorAdapter dataAdapter;
 
@@ -91,14 +93,14 @@ public class MainActivity extends AppCompatActivity {
                         if (endOfLineIndex > 0) {                                            // if end-of-line,
                             String sbprint = sb.substring(0, endOfLineIndex);               // extract string
                             sb.delete(0, sb.length());                                      // and clear
+                            Log.d(TAG, "Data from mixer: " + sbprint);            // update TextView
+
                         }
-                        Log.d(TAG,"here we go for test");
-                        Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
+                        //Log.d(TAG, "...String:"+ sb.toString() +  "Byte:" + msg.arg1 + "...");
                         break;
                 }
             };
         };
-
         btAdapter = BluetoothAdapter.getDefaultAdapter();
 
         checkBTState();
@@ -155,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Create a data stream so we can talk to server.
-        Log.d(TAG, "...Create Socket...");
+        Log.d(TAG, "...hereh Create Socket...");
 
         mConnectedThread = new ConnectedThread(btSocket);
         mConnectedThread.start();
@@ -226,13 +228,16 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             byte[] buffer = new byte[256];  // buffer store for the stream
             int bytes; // bytes returned from read()
-
+            Log.d(TAG, "safasfas");// Send to message queue Handler
             // Keep listening to the InputStream until an exception occurs
             while (true) {
                 try {
+                    Log.d(TAG, "wtf" );// Send to message queue Handler
                     // Read from the InputStream
-                    bytes = mmInStream.read(buffer);        // Get number of bytes and message in "buffer"
-                    h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();     // Send to message queue Handler
+                    bytes = mmInStream.read();        // Get number of bytes and message in "buffer"
+                    Log.d(TAG, "run: here data" + bytes);// Send to message queue Handler
+                    h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();
+                    Log.d(TAG, "run: good sentting data");// Send to message queue Handler
                 } catch (IOException e) {
                     break;
                 }
@@ -249,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 /* Call this from the main activity to send data to the remote device */
 
 

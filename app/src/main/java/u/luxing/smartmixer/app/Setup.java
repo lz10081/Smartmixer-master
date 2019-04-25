@@ -51,7 +51,7 @@ public class Setup extends AppCompatActivity {
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // MAC-address of Bluetooth module (you must edit this line)
-    private static String address = "B8:27:EB:F1:A2:E6";
+    private static String address = "B8:27:EB:A8:96:AB";
 
     /** Called when the activity is first created. */
     /**

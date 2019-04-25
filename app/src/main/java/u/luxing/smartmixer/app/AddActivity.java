@@ -71,8 +71,19 @@ public class AddActivity extends AppCompatActivity {
         EditText tank2 = (EditText) findViewById(R.id.tank2);
         // TODO if everything works refactor these lines out
 
-
-        if(tankLamount < Integer.parseInt(tank1.getText().toString()) || tankRamount < Integer.parseInt(tank2.getText().toString()) ){
+        if(tank1.getText().toString().equals("") || tank2.getText().toString().equals("") ){
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("You have to enter all input ");
+            dlgAlert.setTitle("Error");
+            dlgAlert.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //dismiss the dialog
+                        }
+                    });
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+        }else if(tankLamount < Integer.parseInt(tank1.getText().toString()) || tankRamount < Integer.parseInt(tank2.getText().toString()) ){
             AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
             dlgAlert.setMessage("Amount must be less than the what you have in the set up");
             dlgAlert.setTitle("Error");
